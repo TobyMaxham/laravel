@@ -23,6 +23,6 @@ class SampleUserJob implements ShouldQueue
      */
     public function handle(): void
     {
-        // now
+        // nothing
     }
 }
