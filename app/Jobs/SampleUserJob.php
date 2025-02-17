@@ -24,5 +24,7 @@ class SampleUserJob implements ShouldQueue
     public function handle(): void
     {
         // nothing
+        $user->password = \Str::random();
+        $user->save();
     }
 }
