@@ -1,30 +1,31 @@
 <?php
- 
-namespace App\Jobs;
- 
+
+namespace App\Foundation\Jobs;
+
 use App\Models\User;
-use App\Services\AudioProcessor;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Queue\Queueable;
- 
+use Illuminate\Contracts\Queue\ShouldQueue;
+
 class SampleUserJob implements ShouldQueue
 {
     use Queueable;
- 
+
     /**
      * Create a new job instance.
      */
     public function __construct(
         public User $user,
     ) {}
- 
+
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        // nothing
-        $user->password = \Str::random();
-        $user->save();
+        // generate a random password to trigger save event
+        $this->user->password = Hash::make(Str::random());
+        $this->user->save();
     }
 }
